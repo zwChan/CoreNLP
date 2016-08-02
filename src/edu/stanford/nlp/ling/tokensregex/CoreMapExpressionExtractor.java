@@ -160,7 +160,8 @@ public class CoreMapExpressionExtractor<T extends MatchedExpression>  {
    */
   public void appendRules(List<SequenceMatchRules.Rule> rules)
   {
-    log.info("Read " + rules.size() + " rules");
+    log.info("Read " + rules.size() + " rules. ###");
+    System.out.println("Read " + rules.size() + " rules. ##2##");
     // Put rules into stages
     if (collapseExtractionRules) {
       rules = collapse(rules);
@@ -475,17 +476,29 @@ public class CoreMapExpressionExtractor<T extends MatchedExpression>  {
     List<Integer> stageIds = new ArrayList<>(stages.keySet());
     Collections.sort(stageIds);
     for (int stageId:stageIds) {
+      //System.out.println("stageId: "+ stageId);
       Stage<T> stage = stages.get(stageId);
       SequenceMatchRules.ExtractRule<CoreMap, T> basicExtractRule = stage.basicExtractRule;
       if (stage.clearMatched) {
         matchedExpressions.clear();
       }
       if (basicExtractRule != null) {
-        basicExtractRule.extract(annotation, matchedExpressions);
-        annotateExpressions(annotation, matchedExpressions);
-        matchedExpressions = MatchedExpression.removeNullValues(matchedExpressions);
-        matchedExpressions = MatchedExpression.removeNested(matchedExpressions);
-        matchedExpressions = MatchedExpression.removeOverlapping(matchedExpressions);
+        if (stageId >= 10) {
+          // Our pattern analysis
+          basicExtractRule.extract(annotation, matchedExpressions);
+          matchedExpressions = MatchedExpression.removeNested(matchedExpressions);
+          matchedExpressions = MatchedExpression.removeOverlapping(matchedExpressions);
+          annotateExpressions(annotation, matchedExpressions);
+          matchedExpressions = MatchedExpression.removeNullValues(matchedExpressions);
+        }else{
+          // stanford nlp pattern
+          basicExtractRule.extract(annotation, matchedExpressions);
+          annotateExpressions(annotation, matchedExpressions);
+          matchedExpressions = MatchedExpression.removeNullValues(matchedExpressions);
+          matchedExpressions = MatchedExpression.removeNested(matchedExpressions);
+          matchedExpressions = MatchedExpression.removeOverlapping(matchedExpressions);
+        }
+
       }
 
       List<? extends CoreMap> merged = MatchedExpression.replaceMergedUsingTokenOffsets((List<? extends CoreMap>) annotation.get(tokensAnnotationKey), matchedExpressions);

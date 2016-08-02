@@ -70,6 +70,9 @@ public class StanfordCoreNlpDemo {
     out.println("The top level annotation");
     out.println(annotation.toShorterString());
     out.println();
+    out.println(annotation.keySet());
+    out.println("The keys of the top level annotation");
+    out.println();
 
     // An Annotation is a Map with Class keys for the linguistic analysis types.
     // You can get and use the various analyses individually.
