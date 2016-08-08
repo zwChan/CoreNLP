@@ -45,7 +45,7 @@ public class AnnotationOutputterITest extends TestCase {
             "    {\n" +
             "      \"index\": 0,\n" +
             "      \"parse\": \"(ROOT (NP (JJ Bad) (NN wolf)))\",\n" +
-            "      \"basic-dependencies\": [\n" +
+            "      \"basicDependencies\": [\n" +
             "        {\n" +
             "          \"dep\": \"ROOT\",\n" +
             "          \"governor\": 0,\n" +
@@ -61,7 +61,7 @@ public class AnnotationOutputterITest extends TestCase {
             "          \"dependentGloss\": \"Bad\"\n" +
             "        }\n" +
             "      ],\n" +
-            "      \"collapsed-dependencies\": [\n" +
+            "      \"enhancedDependencies\": [\n" +
             "        {\n" +
             "          \"dep\": \"ROOT\",\n" +
             "          \"governor\": 0,\n" +
@@ -77,39 +77,7 @@ public class AnnotationOutputterITest extends TestCase {
             "          \"dependentGloss\": \"Bad\"\n" +
             "        }\n" +
             "      ],\n" +
-            "      \"collapsed-ccprocessed-dependencies\": [\n" +
-            "        {\n" +
-            "          \"dep\": \"ROOT\",\n" +
-            "          \"governor\": 0,\n" +
-            "          \"governorGloss\": \"ROOT\",\n" +
-            "          \"dependent\": 2,\n" +
-            "          \"dependentGloss\": \"wolf\"\n" +
-            "        },\n" +
-            "        {\n" +
-            "          \"dep\": \"amod\",\n" +
-            "          \"governor\": 2,\n" +
-            "          \"governorGloss\": \"wolf\",\n" +
-            "          \"dependent\": 1,\n" +
-            "          \"dependentGloss\": \"Bad\"\n" +
-            "        }\n" +
-            "      ],\n" +
-            "      \"enhanced-dependencies\": [\n" +
-            "        {\n" +
-            "          \"dep\": \"ROOT\",\n" +
-            "          \"governor\": 0,\n" +
-            "          \"governorGloss\": \"ROOT\",\n" +
-            "          \"dependent\": 2,\n" +
-            "          \"dependentGloss\": \"wolf\"\n" +
-            "        },\n" +
-            "        {\n" +
-            "          \"dep\": \"amod\",\n" +
-            "          \"governor\": 2,\n" +
-            "          \"governorGloss\": \"wolf\",\n" +
-            "          \"dependent\": 1,\n" +
-            "          \"dependentGloss\": \"Bad\"\n" +
-            "        }\n" +
-            "      ],\n" +
-            "      \"enhanced-plus-plus-dependencies\": [\n" +
+            "      \"enhancedPlusPlusDependencies\": [\n" +
             "        {\n" +
             "          \"dep\": \"ROOT\",\n" +
             "          \"governor\": 0,\n" +

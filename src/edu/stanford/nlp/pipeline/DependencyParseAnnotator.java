@@ -113,13 +113,10 @@ public class DependencyParseAnnotator extends SentenceAnnotator  {
     return Collections.unmodifiableSet(new ArraySet<>(Arrays.asList(
         SemanticGraphCoreAnnotations.BasicDependenciesAnnotation.class,
         SemanticGraphCoreAnnotations.CollapsedDependenciesAnnotation.class,
-        SemanticGraphCoreAnnotations.CollapsedCCProcessedDependenciesAnnotation.class
+        SemanticGraphCoreAnnotations.CollapsedCCProcessedDependenciesAnnotation.class,
+        SemanticGraphCoreAnnotations.EnhancedDependenciesAnnotation.class,
+        SemanticGraphCoreAnnotations.EnhancedPlusPlusDependenciesAnnotation.class
     )));
-  }
-
-  public static String signature(String annotatorName, Properties props) {
-    return annotatorName +
-            ".extradependencies:" + props.getProperty(annotatorName + ".extradependencies", "NONE").toLowerCase();
   }
 
 }

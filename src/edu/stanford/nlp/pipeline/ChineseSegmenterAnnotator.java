@@ -7,7 +7,7 @@ import edu.stanford.nlp.ie.AbstractSequenceClassifier;
 import edu.stanford.nlp.ie.crf.CRFClassifier;
 import edu.stanford.nlp.ling.CoreAnnotation;
 import edu.stanford.nlp.ling.CoreLabel;
-import edu.stanford.nlp.ling.ChineseCoreAnnotations;
+import edu.stanford.nlp.ling.SegmenterCoreAnnotations;
 import edu.stanford.nlp.ling.CoreAnnotations;
 import edu.stanford.nlp.util.CoreMap;
 import edu.stanford.nlp.util.PropertiesUtils;
@@ -138,7 +138,7 @@ public class ChineseSegmenterAnnotator implements Annotator  {
       String wordString = new String(ca);
 
       // if this word is a whitespace or a control character, set 'seg' to true for next word, and break
-      if (Character.isWhitespace(origText.charAt(i)) || Character.isISOControl(origText.charAt(i))) {
+      if (Character.isSpaceChar(origText.charAt(i)) || Character.isISOControl(origText.charAt(i))) {
         seg = true;
       } else {
         // if this word is a word, put it as a feature label and set seg to false for next word
@@ -155,7 +155,7 @@ public class ChineseSegmenterAnnotator implements Annotator  {
       }
     }
 
-    annotation.set(ChineseCoreAnnotations.CharactersAnnotation.class, words);
+    annotation.set(SegmenterCoreAnnotations.CharactersAnnotation.class, words);
   }
 
   private void runSegmentation(CoreMap annotation) {
@@ -166,7 +166,7 @@ public class ChineseSegmenterAnnotator implements Annotator  {
     // 0, 0+1 ,
 
     String text = annotation.get(CoreAnnotations.TextAnnotation.class);
-    List<CoreLabel> sentChars = annotation.get(ChineseCoreAnnotations.CharactersAnnotation.class);
+    List<CoreLabel> sentChars = annotation.get(SegmenterCoreAnnotations.CharactersAnnotation.class);
     List<CoreLabel> tokens = new ArrayList<>();
     annotation.set(CoreAnnotations.TokensAnnotation.class, tokens);
 
@@ -186,6 +186,7 @@ public class ChineseSegmenterAnnotator implements Annotator  {
       }
       CoreLabel token = new CoreLabel();
       token.setWord(w);
+      token.setValue(w);
       token.set(CoreAnnotations.CharacterOffsetBeginAnnotation.class, fl.get(CoreAnnotations.CharacterOffsetBeginAnnotation.class));
       pos += w.length();
       fl = sentChars.get(pos - 1);

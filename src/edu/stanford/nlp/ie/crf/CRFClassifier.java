@@ -960,7 +960,7 @@ public class CRFClassifier<IN extends CoreMap> extends AbstractSequenceClassifie
    * Makes a CRFDatum by producing features and a label from input data at a
    * specific position, using the provided factory.
    *
-   * @param info The input data
+   * @param info The input data. Particular feature factories might look for arbitrary keys in the IN items.
    * @param loc The position to build a datum at
    * @param featureFactories The FeatureFactories to use to extract features
    * @return The constructed CRFDatum
@@ -1181,7 +1181,7 @@ public class CRFClassifier<IN extends CoreMap> extends AbstractSequenceClassifie
     if (!flags.suppressTestDebug)
       log.info(StringUtils.getShortClassName(this) + " tagged " + numWords + " words in " + numDocs
         + " documents at " + nf.format(wordspersec) + " words per second.");
-    if (resultsCounted && !flags.suppressTestDebug) {
+    if (resultsCounted && ! flags.suppressTestDebug) {
       printResults(entityTP, entityFP, entityFN);
     }
   }
@@ -1659,8 +1659,7 @@ public class CRFClassifier<IN extends CoreMap> extends AbstractSequenceClassifie
         if (flags.testFiles != null) {
           String[] testFiles = flags.testFiles.split(",");
           for (String testFile : testFiles) {
-            CRFClassifierEvaluator<IN> crfEvaluator = new CRFClassifierEvaluator<>("Test set ("
-                    + testFile + ")", this);
+            CRFClassifierEvaluator<IN> crfEvaluator = new CRFClassifierEvaluator<>("Test set (" + testFile + ')', this);
             ObjectBank<List<IN>> testObjBank = makeObjectBankFromFile(testFile, readerAndWriter);
             List<Triple<int[][][], int[], double[][][]>> testDataAndLabels = documentsToDataAndLabelsList(testObjBank);
             crfEvaluator.setTestData(testObjBank, testDataAndLabels);
